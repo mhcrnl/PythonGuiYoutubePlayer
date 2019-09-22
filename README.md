@@ -1,6 +1,6 @@
-# Project Title
+# Python tkinter GUI youtube player
 
-One Paragraph of project description goes here
+Play the youtube video on browser.
 
 ## Getting Started
 
