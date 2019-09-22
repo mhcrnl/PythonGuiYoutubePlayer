@@ -15,6 +15,12 @@
     RUN COMAND:
             python tk_window.py
 """
+import os
+import webbrowser
+
+import requests
+from bs4 import BeautifulSoup
+
 import tkinter as tk
 from tkinter import ttk
 
@@ -27,12 +33,20 @@ class MainApplication(tk.Frame):
         # create the rest of gui here
 
         ttk.Label(parent, text="Youtube search for:").pack()
-        ttk.Entry(parent).pack()
-        tk.Button(parent, text="Search").pack()
+        query = ttk.Entry(parent).pack()
+        tk.Button(parent, text="Search", command=self.play).pack()
         tk.Button(parent, text="Quit", command=self.quit).pack()
 
     def quit(self):
         self.parent.destroy()
+
+    def play(self):
+        url = 'https://www.youtube.com/watch?v=ECs1Gh5Q198'
+        source_code = requests.get(url,timeout=15)
+        plain_text = source_code.text
+        soup = BeautifulSoup(plain_text, "html.parser")
+
+        webbrowser.open(url)
 
 if __name__ == "__main__":
     root = tk.Tk()
